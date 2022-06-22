@@ -1,6 +1,7 @@
 # python_gmc_300e_serial
 
-A python serial interface to a GMC 300E Plus Geiger Counter and other GQ Electronics Geiger Counters.
+A python serial interface to a GMC 300E Plus Geiger Counter and other 
+[GQ Electronics](https://www.gqelectronicsllc.com/) Geiger Counters.
 
 It is based on the specification of the Communication Protocol by GQ Electronics "GQ-RFC1201.txt" and tries to implement
 Python wrapper functions for the commands presented there. 
