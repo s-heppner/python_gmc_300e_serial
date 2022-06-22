@@ -4,8 +4,24 @@ import struct
 
 
 class GMC300eGeigerCounter:
-    def __init__(self, path_to_serial: str):
-        self.serial: serial.Serial = serial.Serial(path_to_serial, 57600)
+    def __init__(self, path_to_serial: str, baud: int = 57600):
+        """
+        Initialize a GMC Geiger Counter serial connection
+
+        :param path_to_serial: Path to the serial interface. Here is how to find it:
+            - Plug in the Geiger Counter
+            - Check `lsusb` for the new device and remember the ID, e.g. `1a86`
+            - `ls -l /dev/serial/by-id` will print out something like this:
+                     usb-1a86_USB_Serial-if00-port0 -> ../../ttyUSB0
+            - Remember the `../../ttyUSB0` part and navigate to `/dev`
+            - Change the owner of the serial interface to your python user: `chown sebastian:sebastian /dev/ttyUSB0`
+            - The `/dev/ttyUSB0` path is the one o enter here
+        :param baud: The baud rate at which the device communicates.
+            For GMC-300 V3.xx: 57600
+            For GMC-300 Plus V4.xx and later version firmware: 115200
+            For GMC-320, the serial port communication baud rate is variable, default: 115200
+        """
+        self.serial: serial.Serial = serial.Serial(path_to_serial, baud)
 
     def version(self) -> str:
         """
